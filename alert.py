@@ -1,8 +1,11 @@
-import winsound
-import time
-
+import pygame
 def play_alert():
-    # Windows'ta sistem sesi çal
-    winsound.Beep(1000, 500)  # 1000 Hz, 500 ms
-    time.sleep(0.1)
-    winsound.Beep(1000, 500)  # İkinci bip sesi 
+    try:
+        pygame.mixer.init()
+        pygame.mixer.music.load('ses_dosyaniz.wav')  # veya .mp3
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            continue  # Ses bitene kadar bekle
+    except Exception as e:
+        # Hata durumunda (örn. dosya bulunamazsa) ne yapılacağını belirleyin
+        print(f"Ses çalınamadı: {e}") 
